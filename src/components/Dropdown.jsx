@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 // setup unit test for each function. make sure that adding new entries keeps id unique
-const Dropdown = ({options, placeholder}) => {
+const Dropdown = ({options, placeholder, listId}) => {
+  console.log(options)
   const [selected, setSelected] = useState([])
   const [inputVal, setInputVal] = useState("")
   const [prevInput, setPrevInput] = useState("")
@@ -34,8 +35,8 @@ const Dropdown = ({options, placeholder}) => {
         <span onClick={handleDelete} id={el.id} className='selected--delete'>&#10006;</span>
         </p>
         )})}
-        <input placeholder={placeholder} onChange={handleChange} value={inputVal} type="text" tabIndex="1" className='select' list='options' />
-        <datalist id="options">
+        <input placeholder={placeholder} onChange={handleChange} value={inputVal} type="text" tabIndex="1" className='select' list={listId} />
+        <datalist id={listId}>
           {options.map(el => <option data-testid="option" key={el} value={el}>{el}</option>)}
         </datalist>
         <span className='barrier'>|</span>
