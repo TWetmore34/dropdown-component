@@ -17,21 +17,30 @@ const DropdownCustom = ({placeholder, options}) => {
   useEffect(() => {
     setPrevInput(inputVal.slice(0, inputVal.length-1))
   },[inputVal, setPrevInput])
+
   window.addEventListener("click", () => {
     setVisible(document.activeElement === ref.current)
   })
+  const handleToggle = (e) => {
+    e.stopPropagation()
+    setVisible(!visible)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setIdVal(idVal + 1)
     setSelected([...selected, {id: idVal, text: inputVal}])
     setInputVal("")
   }
+
   const handleDelete = (e) => {
     setSelected(selected.filter(el => el.id !== parseInt(e.target.id)))
   }
+
   const setFocus = () => {
     ref.current.focus()
   }
+  
   const handleSetSelected = (e) => {
     setSelected([...selected, {text: e.target.id, id: idVal}])
     setIdVal(idVal + 1)
@@ -46,7 +55,7 @@ const DropdownCustom = ({placeholder, options}) => {
         ))}
         <div onClick={setFocus} style={{width: "100%", display: "flex", justifyContent: "end", alignItems: "center"}}>
             <input ref={ref} id="test" placeholder={placeholder} onChange={handleChange} value={inputVal} type="text" tabIndex="1" className='select' />
-            <span className='arrow-down' style={{marginBottom: ".5rem"}}>&#8964;</span>
+            <span className='arrow-down' onClick={handleToggle} style={{marginBottom: ".5rem"}}>&#8964;</span>
         </div>
         <span className='barrier'>|</span>
         <button data-testid="submit" onClick={handleSubmit} className='submit'>&#128269;</button>
