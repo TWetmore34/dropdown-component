@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useState, useRef} from 'react'
 
 const DropdownCustom = ({placeholder, options}) => {
   const [selected, setSelected] = useState([])
@@ -40,7 +40,6 @@ const DropdownCustom = ({placeholder, options}) => {
   }
 
   const handleSetSelected = (e) => {
-    console.log("b")
     setSelected([...selected, {text: e.target.id, id: idVal}])
     setIdVal(idVal + 1)
     setInputVal("")
