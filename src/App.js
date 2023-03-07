@@ -1,4 +1,5 @@
 import Dropdown from './components/Dropdown';
+import DropdownCustom from './components/DropdownCustom';
 import './App.css';
 import { useState } from 'react';
 function App() {
@@ -6,7 +7,8 @@ function App() {
   return (
     <div className="App">
       <Dropdown listId={"options"} options={data} placeholder="search" />
-      <Dropdown listId={"options2"} options={["option 1", "option 2"]} placeholder="pick a favorite"/>
+      <DropdownCustom options={data} placeholder={"search"}>
+      </DropdownCustom>
     </div>
   );
 }

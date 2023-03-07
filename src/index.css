@@ -6,7 +6,7 @@
     border-radius: .3rem;
     display: flex;
     align-items: center;
-    width: 500px;
+    width: 60vw;
     margin: 0 auto;
 }
 .select {
@@ -41,4 +41,30 @@ input[type="text"]:focus {
 .selected--delete {
     margin-left: .1rem;
     font-size: 12px;
+}
+.selected--delete:hover {
+    color: red;
+    cursor: pointer;
+}
+.select--container {
+    width: 60vw;
+    margin: 0 auto;
+}
+.arrow-down:hover {
+    cursor: pointer;
+}
+
+.options {
+    margin: 0%;
+    padding: 0%;
+    background-color: #ddd;
+    list-style-type: none;
+    width: 100%;
+}
+.option {
+    margin: 0%;
+}
+.option:hover {
+    background-color: #ccc;
+    width: 100%;
 }
