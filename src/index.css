@@ -6,7 +6,8 @@
     border-radius: .3rem;
     display: flex;
     align-items: center;
-    width: 60vw;
+    width: fit-content;
+    min-width: 60vw;
     margin: 0 auto;
 }
 .select {
@@ -46,10 +47,12 @@ input[type="text"]:focus {
     color: red;
     cursor: pointer;
 }
+
 .select--container {
-    width: 60vw;
+    width: fit-content;
     margin: 0 auto;
 }
+
 .arrow-down:hover {
     cursor: pointer;
 }

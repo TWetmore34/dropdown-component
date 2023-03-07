@@ -13,6 +13,7 @@ const DropdownCustom = ({placeholder, options}) => {
     }
     setIdVal(idVal + 1)
     setSelected([...selected,{id: idVal, text: e.target.value}])
+    setInputVal("")
   }
   useEffect(() => {
     setPrevInput(inputVal.slice(0, inputVal.length-1))
@@ -40,10 +41,11 @@ const DropdownCustom = ({placeholder, options}) => {
   const setFocus = () => {
     ref.current.focus()
   }
-  
+
   const handleSetSelected = (e) => {
     setSelected([...selected, {text: e.target.id, id: idVal}])
     setIdVal(idVal + 1)
+    setInputVal("")
   }
   return (
     <div className='select--container'>
@@ -62,7 +64,16 @@ const DropdownCustom = ({placeholder, options}) => {
       </form>
         {visible ? 
         <div className='options'>
-           {options.map(el => <p className='option' id={el} onClick={handleSetSelected} key={el}>{el}</p>)}
+           {options.map(el => {
+            if(inputVal === "") {
+              return <p className='option' id={el} onClick={handleSetSelected} key={el}>{el}</p>
+            }
+            if(el.includes(inputVal)){
+              return <p className='option' id={el} onClick={handleSetSelected} key={el}>{el}</p>
+            }
+            return null
+           }
+           )}
         </div>
         : null}
   </div>
