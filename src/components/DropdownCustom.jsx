@@ -3,30 +3,31 @@ import React, {useEffect, useState, useRef} from 'react'
 const DropdownCustom = ({placeholder, options}) => {
   const [selected, setSelected] = useState([])
   const [inputVal, setInputVal] = useState("")
-  const [prevInput, setPrevInput] = useState("")
+  // toggles dropdown menu
   const [visible, setVisible] = useState(false)
+  // handle unique keys for selected arr
   let [idVal, setIdVal] = useState(0)
   const ref = useRef(null)
-  const handleChange = (e) => {
-    if(e.target.value.length - prevInput.length <= 2) {
-      return setInputVal(e.target.value)
-    }
-    setIdVal(idVal + 1)
-    setSelected([...selected,{id: idVal, text: e.target.value}])
-    setInputVal("")
-  }
-  useEffect(() => {
-    setPrevInput(inputVal.slice(0, inputVal.length-1))
-  },[inputVal, setPrevInput])
 
-  window.addEventListener("click", () => {
+  const handleChange = (e) => {
+    setInputVal(e.target.value)
+  }
+
+  // watches for whether the input el has been focused or not
+  document.addEventListener("click", () => {
     setVisible(document.activeElement === ref.current)
   })
+  // intentional toggles based on the arrow down key in the input section
   const handleToggle = (e) => {
     e.stopPropagation()
     setVisible(!visible)
   }
+  // resets focus to input el for its container (this is what lets the document listener work)
+  const setFocus = () => {
+    ref.current.focus()
+  }
 
+  // handles addition based on typed in values
   const handleSubmit = (e) => {
     e.preventDefault()
     setIdVal(idVal + 1)
@@ -38,11 +39,8 @@ const DropdownCustom = ({placeholder, options}) => {
     setSelected(selected.filter(el => el.id !== parseInt(e.target.id)))
   }
 
-  const setFocus = () => {
-    ref.current.focus()
-  }
-
   const handleSetSelected = (e) => {
+    console.log("b")
     setSelected([...selected, {text: e.target.id, id: idVal}])
     setIdVal(idVal + 1)
     setInputVal("")
